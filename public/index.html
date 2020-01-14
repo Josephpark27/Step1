@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="colorlib.com">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,600,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" />
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <title>
+      Step 1: Research
+    </title>
+  </head>
+  <body style="background-color: #FFF;">
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="/__/firebase/7.6.2/firebase-app.js"></script>
+  
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="/__/firebase/7.6.2/firebase-analytics.js"></script>
+  
+    <!-- Add Firebase products that you want to use -->
+    <script src="/__/firebase/7.6.2/firebase-auth.js"></script>
+    <script src="/__/firebase/7.6.2/firebase-firestore.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <div class="s010">
+      <form autocomplete="off" action="/action_page.php">
+        <div class="autocomplete">
+          <div class="inner-form">
+            <div class="basic-search">
+              <div class="input-field">
+                <input id="search" type="text" placeholder="Research a company..."/>
+                <div class="icon-wrap">
+                  <button type="button" class="circleonastick" onclick="getDashboard(search.value)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                  </svg>
+                </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+    </div>
+
+    <!-- <script src="js/search_extras/choices.js"></script> -->
+    <script src="js/search.js"></script>
+<!-- initiate the autocomplete function on the "search" element, and pass along the ticker array as possible autocomplete values: -->
+    <script>
+      autocomplete(document.getElementById("search"), tickerList);
+    </script>
+
+  <script>
+
+    firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // user is logged in, therefore do not show the UI and rather just allow them to proceed
+            console.log('user is logged in, don\'t show UI');
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('createAccount').style.display = 'none';
+
+          } else {
+            // SHOW LOGON UI
+            // User has not logged in or is a new user.
+            // This mess is to manage firebase signin
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+            var uiConfig = {
+              callbacks: {
+                signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                  // User successfully signed in.
+                  // Return type determines whether we continue the redirect automatically
+                  // or whether we leave that to developer to handle.
+                  return true;
+                },
+                uiShown: function() {
+                  // The widget is rendered.
+                  // Hide the loader.
+                  document.getElementById('loader').style.display = 'none';
+                }
+              },
+              // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+              signInFlow: 'popup',
+              signInSuccessUrl: 'index.html',
+              signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+              ]
+            };
+
+            ui.start('#firebaseui-auth-container', uiConfig);
+          }
+    })
+
+
+
+  </script>
+    <h1 id="createAccount" style="width:100%;text-align:center;font-family: 'Lato', sans-serif;">Create an account</h1>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+  
+  </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

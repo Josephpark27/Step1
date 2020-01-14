@@ -1,0 +1,7 @@
+firebase serve
+http://localhost:5000
+
+
+URL: step1.space
+
+Financial Modeling Prep API 

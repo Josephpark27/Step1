@@ -1,0 +1,33 @@
+#exampleModalLongTitle {
+  color: #4e73df;
+}
+
+.btn-secondary {
+	background-color: none;
+	/*z-index = 1;*/
+	width: 30px;
+	height: 30px;
+	padding: 0px;
+	border: none;
+	background: none;
+}
+
+.qmark {
+	z-index = 1;
+	width: 20px;
+	height: 20px;
+}
+
+.text-primary {
+	font-size: 1.25rem;
+}
+
+.modal {
+  overflow-y:auto;
+}	
+
+/*.dashboard-pic-size {
+	width: 300px;
+	height: 200px;
+}
+*/

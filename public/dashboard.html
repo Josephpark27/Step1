@@ -1,0 +1,3376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>
+    Step 1: Research
+  </title>
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="css/search.css" rel="stylesheet">
+  <link href="css/modal.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="/__/firebase/7.6.2/firebase-app.js"></script>
+  
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="/__/firebase/7.6.2/firebase-analytics.js"></script>
+  
+    <!-- Add Firebase products that you want to use -->
+    <script src="/__/firebase/7.6.2/firebase-auth.js"></script>
+    <script src="/__/firebase/7.6.2/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.6.2/firebase-functions.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <script src="js/modal.js"></script>
+  
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          <form autocomplete="off" action="/action_page.php" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="autocomplete" style="margin-left: 30%;">
+              <div class="input-group">
+
+                <input type="text" id="search" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button" onclick="getDashboard(search.value)">
+                    <i class="fas fa-search fa-sm"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <img src="img/image.png" style="height: 65px; margin-right: 70px;" alt="Cedric the Hero" >
+        </nav>
+        <!-- End of Topbar -->
+
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800" id="pageHeaderSymbol">[TSLA]: Tesla Motors, Inc.</h1>
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+
+            <!-- Earnings (Annual) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Current Stock Price</div>
+                      <div style="display: flex; flex-direction: row; width: 100%;">
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 stock-name">Loading...</div>
+                        <div id="stockPerc" style="margin-left: 7%;" class="h5 mb-0 font-weight-bold stock-name"></div>
+                      </div>                    </div>
+                    <!-- <div class="col-auto">
+                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tasks Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4" id="marketCap">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Market Capitalization</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800" id="mktCap"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-auto">
+                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <!-- <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-xl-3 col-md-6 mb-4">
+            <a type="button" data-toggle="modal" data-target="#exampleModalCenter">
+              <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body" >
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Add more elements</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">Want to learn more?</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-plus fa-2x text-gray-300"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </a>
+            </div>
+
+          </div>
+          
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="max-width: 1000px;">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Select dashboard elements</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="flex-wrap: wrap;display:flex; justify-content: space-around;">
+
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <img src="./img/market-summary.jpg" class="card-img-top" alt="...">
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Gold_Price_%281968-2008%29.gif" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Historical Stock Prices</h5>
+                      <p class="card-text">Historical stock prices represent a changing stock price over the past week to the past five years.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#marketModalCenter" class="btn btn-primary">Learn more</a>
+                        <a href="#" onclick="showHistoricalEarnings();" class="btn btn-success" id="historicalEarningsAdd">Add</a>
+                        <a href="#" onclick="removeHistoricalEarnings();" class="btn btn-danger" id="historicalEarningsRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Crypto-currency_market_capitalizations.png" class="card-img-top" alt="..."> -->
+                    <img src="./img/market-cap.jpg" class="card-img-top dashboard-pic-size" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Market Capitalization</h5>
+                      <p class="card-text">Market capitalization refers to the market value of a company's outstanding shares of stock.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#capitalizationModalCenter"class="btn btn-primary">Learn more</a>
+                        <a href="#" onclick="showMarketCap();" class="btn btn-success" id="marketCapAdd">Add</a>
+                        <a href="#" onclick="removeMarketCap();" class="btn btn-danger" id="marketCapRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <img src="./img/analyst.jpg" class="card-img-top" alt="...">
+                    <!-- <img src="https://2001-2009.state.gov/cms_images/071029_russia_women1.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Analyst Consensus</h5>
+                      <p class="card-text">Analysts study companies and attempt to predict the expenses and revenue of a company.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#analystModalCenter" class="btn btn-primary">Learn more</a>
+                        <a href="#" class="btn btn-success" onclick="showAnalyst();" id="analystCardAdd">Add</a>                        
+                        <a href="#" class="btn btn-danger" onclick="removeAnalyst();" id="analystCardRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <img src="./img/revenue.jpg" class="card-img-top dashboard-pic-size" alt="...">
+                    <!-- <img src="https://live.staticflickr.com/644/32586973746_f1616c88f5_z.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Revenue Over Time</h5>
+                      <p class="card-text">Revenue is the top line or gross income figure from which costs are subtracted to determine net income.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#revenueModalCenter"
+                        class="btn btn-primary">Learn more</a>
+                        <a href="#" onclick="showRevenueOver();" class="btn btn-success" id="revenueOverAdd">Add</a>
+                        <a href="#" onclick="removeRevenueOver();" class="btn btn-danger" id="revenueOverRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <img src="./img/cash.jpg" class="card-img-top dashboard-pic-size" alt="...">
+                    <!-- <img src="https://live.staticflickr.com/1545/25954560974_b7ab4b340d_b.jpg" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Cash Flow Sources</h5>
+                      <p class="card-text">A companies cash flow shows how a company is using its capital. This indicates business sustainability.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#cashFlowModalCenter"class="btn btn-primary">Learn more</a>
+                        <a href="#" onclick="showRevenueSources();" class="btn btn-success" id="revenueSourcesAdd">Add</a>
+                        <a href="#" onclick="removeRevenueSources();" class="btn btn-danger" id="revenueSourcesRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card" style="width: 18rem; margin: 10px">
+                    <img src="./img/current.jpg" class="card-img-top dashboard-pic-size" alt="...">
+                    <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/ABS-5676.0-BusinessIndicatorsAustralia-InventoriessalesRatioCurrentPricesOriginal-InventoriesSalesRatio-TotalState-RetailTrade-CurrentPrice-TotalScp_scope-A3531382W.svg/768px-thumbnail.svg.png" class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Current Ratio</h5>
+                      <p class="card-text">The Current Ratio helps explain how a company can pay expenses by comparing assets against liabilities.</p>
+                      <div style="display: flex; justify-content: space-around;">
+                        <a href="#" data-toggle="modal" data-target="#currentModalCenter"class="btn btn-primary" id="currentRatioLearnMore">Learn more</a>
+                        <a href="#" onclick="showCurrentRatio();" class="btn btn-success" id="currentRatioAdd">Add</a>
+                        <a href="#" onclick="removeCurrentRatio();" class="btn btn-danger" id="currentRatioRemove">Remove</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" onclick="saveFlags();" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Content Row -->
+
+
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7" id="historicalEarnings">
+              <div class="card shadow mb-4" >
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Market Summary</h6>
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#marketModalCenter"><img src="./img/questionmark2.png" class="qmark">
+                  </button>
+                </div>
+                <div class="time">
+                  <a href="#" onclick="showWeekSummary();" class="btn btn-success" id="weekSummaryAdd">Week</a>
+                  <a href="#" onclick="showMonthSummary();" class="btn btn-success" id="monthSummaryAdd">Month</a>
+                  <a href="#" onclick="showSixMonthSummary();" class="btn btn-success" id="sixMonthSummaryAdd">6 Months</a>
+                  <a href="#" onclick="showYearSummary();" class="btn btn-success" id="yearSummaryAdd">Year</a>
+                  <a href="#" onclick="showThreeYearSummary();" class="btn btn-success" id="threeYearSummaryAdd">3 Years</a>
+                  <a href="#" onclick="showFiveYearSummary();" class="btn btn-success" id="fiveYearSummaryAdd">5 Years</a>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area" id="weekSummary">
+                    <canvas id="weekSummaryChart"></canvas>
+                  </div>
+                  <div class="chart-area" id="monthSummary" style="display: none;">
+                    <canvas id="monthSummaryChart"></canvas>
+                  </div>
+                  <div class="chart-area" id="sixMonthSummary" style="display: none;">
+                    <canvas id="sixMonthSummaryChart"></canvas>
+                  </div>
+                  <div class="chart-area" id="yearSummary" style="display: none;">
+                    <canvas id="yearSummaryChart"></canvas>
+                  </div>
+                  <div class="chart-area" id="threeYearSummary" style="display: none;">
+                    <canvas id="threeYearSummaryChart"></canvas>
+                  </div>
+                  <div class="chart-area" id="fiveYearSummary" style="display: none;">
+                    <canvas id="fiveYearSummaryChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="marketModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Market Summary</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                  </div>
+                  <div class="modal-body">
+                    <p>There is a common saying: “Don’t judge a book by its cover.” Some equally valid words of wisdom for investors could be: “Don’t judge a stock by its share price.” Despite so much information available for investors, many people still incorrectly assume that a stock with a small dollar price is cheap, while another with a heftier price is expensive. This notion can lead investors down the wrong path and into some bad decisions for their money.</p>
+
+                    <p>Most people believe a stock's value is determined by its price. That's only true to a certain extent. But there is a real big difference between the two. The stock's price only tells you a company's current value or its market value. So the price represents how much the stock trades at — or the price agreed upon by a buyer and seller. More buyers mean the stock's price will climb, while more sellers mean the price will drop.</p>
+
+                    <p>On the other hand, the intrinsic value is a company's actual value. This value includes both tangible and intangible factors including fundamental analysis. You can use a company's qualitative and quantitative aspects to determine the value—the firm's business model and financial statements to name a few.</p>
+                 
+                    <p>When investing in a company, it is important to consider the change of the companies stock price over time. While a stock may be doing well during the past week, if its performance over the past year is poor, it may not be a good investment.</p>
+
+                    <p>As an investor, it is important to consider your investment horizon as well. Consider how long you'd like to stay invested in that stock, and gauage your risk accordingly. By looking at a chart, you can also tell how volatile, or subject to change, a stock is. The more 'bumpy' the graph, the more volatile the company. Volatile stocks are usually less predictable and more risky..</p>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="capitalizationModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Market Capitalization</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                  </div>
+                  <div class="modal-body">
+                    <p>Market capitalization refers to the total dollar market value of a company's outstanding shares of stock. Commonly referred to as "market cap," it is calculated by multiplying the total number of a company's outstanding shares by the current market price of one share. As an example, a company with 10 million shares selling for $100 each would have a market cap of $1 billion. The investment community uses this figure to determine a company's size, as opposed to using sales or total asset figures.</p>
+
+                    <p>Using market capitalization to show the size of a company is important because company size is a basic determinant of various characteristics in which investors are interested, including risk. It is also easy to calculate. A company with 20 million shares selling at $100 a share would have a market cap of $2 billion.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+                                   <!-- Pie Chart -->
+           <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4" >
+              <!-- Card Header - Dropdown -->
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Description</h6>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                <div class="text-left">
+                  <p id="companyDescription">
+                    <Loading class=""></Loading>
+                  </p>
+                  <p id="companyCeo">
+                  </p>
+                  <p><a id="companySite" href="#"></a></p>
+                  <p id="industry"></p>
+                  <p id="sector"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!-- Pie Chart -->
+            <div class="col-xl-4 col-lg-5" id="revenueSources">
+              <div class="card shadow mb-4" >
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Cash Flow Sources</h6>
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#cashFlowModalCenter"><img src="./img/questionmark2.png" class="qmark">
+                  </button>
+                </div>
+                <div>
+                  <h6 class="m-0 font-weight-bold" id="netCashFlow">Net Cash Flow: </h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="cashBarChart"></canvas>
+                  </div>
+                  <!-- <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="cashFlowModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cash Flow Sources</h5>
+                  </div>
+                  <div class="modal-body">
+                    <p>Positive cash flow indicates that a company's liquid assets are increasing, enabling it to settle debts, reinvest in its business, return money to shareholders, pay expenses and provide a buffer against future financial challenges. Companies with strong financial flexibility can take advantage of profitable investments. They also fare better in downturns, by avoiding the costs of financial distress.</p>
+
+                    <p>Operating cash flow (OCF) is a measure of the amount of cash generated by a company's normal business operations. Operating cash flow indicates whether a company can generate sufficient positive cash flow to maintain and grow its operations, otherwise it may require external financing for capital expansion.</p>
+
+                    <p>Cash flow from investing is listed on a company's cash flow statement. Cash flow from investing activities includes any inflows or outflows of cash from a company's long-term investments.</p>
+
+                    <p>Cash flow from financing activities (CFF) is a section of a company’s cash flow statement, which shows the net flows of cash that are used to fund the company. Financing activities include transactions involving debt, equity, and dividends. Cash flow from financing activities provides investors with insight into a company’s financial strength and how well a company's capital structure is managed.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="analystModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Analyst Consensus</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                  </div>
+                  <div class="modal-body">
+                    <p>An investment analyst is a financial professional with expertise in evaluating financial and investment information, typically for the purpose of making buy, sell and hold recommendations for securities. Brokerage firms, investment advisors and mutual fund companies hire investment analysts to prepare investment research for multiple purposes.</p>
+
+                    <p>Buy-side analysts work for fund managers at mutual fund brokers and financial advisory firms and identify investment opportunities for their firm.</p>
+
+                    <p>Sell-side equity analysts often work for the big investment banks and issue buy, sell and hold recommendations as well as company-specific research.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Revenue Over Time -->
+            <div class="col-xl-8 col-lg-7" id="revenueOver">
+              <div class="card shadow mb-4" >
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Revenue Over Time</h6>
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#revenueModalCenter"><img src="./img/questionmark2.png" class="qmark">
+                  </button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="revenueOverTime"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="revenueModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Revenue</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                  </div>
+                  <div class="modal-body">
+                    <p>Revenue is the income generated from normal business operations and includes discounts and deductions for returned merchandise. It is the top line or gross income figure from which costs are subtracted to determine net income.</p>
+
+                    <p>Revenue is known as the top line because it appears first on a company's income statement. Net income, also known as the bottom line, is revenues minus expenses. There is a profit when revenues exceed expenses. To increase profit, and hence earnings per share for its shareholders, a company increases revenues and/or reduces expenses. Investors often consider a company's revenue and net income separately to determine the health of a business. It is possible for net income to grow while revenues remain stagnant because of cost-cutting. Such a situation does not bode well for a company's long-term growth. When public companies report their quarterly earnings, the two figures that receive the most attention are revenues and earnings per share ("earnings" being equivalent to net income). Subsequent price movement in stocks generally correlates to whether a company beat or missed analysts' revenue and earnings per share expectations.</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Current Ratio Over Time -->
+            <div class="col-xl-8 col-lg-7" id="currentRatio">
+              <div class="card shadow mb-4" >
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Current Ratio Over Time</h6>
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalCenter"><img src="./img/questionmark2.png" class="qmark">
+                  </button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="currentRatioChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="currentModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Current Ratio</h5>
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                  </div>
+                  <div class="modal-body">
+                    <p>The current ratio is a liquidity ratio that measures a company's ability to pay short-term obligations or those due within one year. It tells investors and analysts how a company can maximize the current assets on its balance sheet to satisfy its current debt and other payables.</p>
+
+                    <p>
+                      The current ratio is sometimes referred to as the “working capital” ratio and helps investors understand more about a company’s ability to cover its short-term debt with its current assets.
+                    </p>
+
+                    <p>
+                      Weaknesses of the current ratio include the difficulty of comparing the measure across industry groups, overgeneralization of the specific asset and liability balances, and the lack of trending information.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Analyst Discussion -->
+            <div class="col-xl-4 col-lg-5" id="analystCard">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Analyst Consensus</h6>
+                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#analystModalCenter"><img src="./img/questionmark2.png" class="qmark">
+                  </button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-pie pt-4 pb-2">
+                    <canvas id="analystDiscussion"></canvas>
+                  </div>
+                  <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-success"></i> Strong Buy
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-info"></i> Buy
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-secondary"></i> Neutral
+                    </span>
+                    <span class="mr-2">
+                      <i class="fas fa-circle text-warning"></i> Sell
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Step1 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Search scripts -->
+  <!-- <script src="js/search_extras/choices.js"></script> -->
+  <script src="js/search.js"></script>
+<!-- initiate the autocomplete function on the "search" element, and pass along the ticker array as possible autocomplete values: -->
+  <script>
+    autocomplete(document.getElementById("search"), tickerList);
+  </script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+  <script>
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function getRequest(url, success) {
+        var req = false;
+        try {
+          req = new XMLHttpRequest();
+        } catch (e) {
+          try {
+            req = new ActiveXObject("Msxml2.XMLHTTP");
+          } catch (e) {
+            try {
+              req = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+              return false;
+            }
+          }
+        }
+        if (!req) return false;
+        if (typeof success != 'function') success = function() {};
+        req.onreadystatechange = function() {
+          if (req.readyState == 4) {
+            if (req.status === 200) {
+              success(req.responseText)
+            }
+          }
+        }
+        req.open("GET", url, true);
+        req.send(null);
+        return req;
+      }
+
+    var ticker = getParameterByName("ticker"); 
+    console.log("Found stock symbol:", ticker);
+    var companyName = getCompanyNameFromSymbol(ticker);
+    document.getElementById("pageHeaderSymbol").textContent = "[" +  ticker + "]" + " - " + companyName;
+
+    var intervalTime = 60;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // https://financialmodelingprep.com/developer/docs
+      console.log("ttttt" + 'https://financialmodelingprep.com/api/v3/stock/real-time-price/' + ticker + '?datatype=json')
+      getRequest(
+        'https://financialmodelingprep.com/api/v3/stock/real-time-price/' + ticker + '?datatype=json',
+        drawOutput
+      );
+
+      setInterval(() => {
+        getRequest(
+          'https://financialmodelingprep.com/api/v3/stock/real-time-price/' + ticker + '?datatype=json',
+          drawOutput
+        );
+      }, 1000 * intervalTime);
+
+      function drawOutput(responseText) {
+
+        let resp = JSON.parse(responseText);
+
+        var elements = document.querySelectorAll('.stock-name')[0];
+        elements.innerHTML = "$ " + resp.price;
+      }
+    })
+
+
+    // https://financialmodelingprep.com/developer/docs
+    getRequest(
+      'https://financialmodelingprep.com/api/v3/company/rating/' + ticker,
+      drawOutput
+    );
+
+    function drawOutput(responseText) {
+  
+      let resp = JSON.parse(responseText)
+      .rating.score;
+      let jsrep = JSON.parse(responseText)
+
+      console.log(JSON.parse(responseText).ratingDetails)
+
+      var dataLocs = {"Strong Buy":0, "Buy":1, "Neutral":2, "Sell":3}
+      var dataOutArr = [0,0,0,0]
+      for (var key in jsrep.ratingDetails) {
+          if (jsrep.ratingDetails.hasOwnProperty(key)) {
+              console.log(key + " -> " + jsrep.ratingDetails[key].recommendation);
+              dataOutArr[dataLocs[jsrep.ratingDetails[key].recommendation]] = dataOutArr[dataLocs[jsrep.ratingDetails[key].recommendation]] +1
+          }
+      }
+
+    console.log(dataOutArr);
+
+  var ctx = document.getElementById("analystDiscussion");
+  var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ["Strong Buy", "Buy", "Neutral", "Sell"],
+      datasets: [{
+        data: dataOutArr,
+        backgroundColor: ['#1cc88a', '#36b9cc', '#858796', '#f6c23e'],
+        hoverBackgroundColor: ['#1cc88a', '#36b9cc', '#858796', '#f6c23e'],
+        hoverBorderColor: "rgba(234, 236, 244, 1)",
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        backgroundColor: "rgb(255,255,255)",
+        bodyFontColor: "#858796",
+        borderColor: '#dddfeb',
+        borderWidth: 1,
+        xPadding: 15,
+        yPadding: 15,
+        displayColors: false,
+        caretPadding: 10,
+      },
+      legend: {
+        display: false
+      },
+      cutoutPercentage: 80,
+    },
+  });
+    }
+
+
+      getRequest(
+     'https://financialmodelingprep.com/api/v3/financials/cash-flow-statement/' + ticker,
+     drawOutputBar
+   );
+
+   function drawOutputBar(responseText) {
+    // console.log(responseText);
+     let resp = JSON.parse(responseText);
+     var recentCashFlows = resp.financials['0']
+     console.log(recentCashFlows);
+
+     cashFlows = [];
+
+     var operating = recentCashFlows['Operating Cash Flow'];
+     var investing = recentCashFlows['Investing Cash flow'];
+     var financing = recentCashFlows['Financing Cash Flow'];
+     var netChange = recentCashFlows['Net cash flow / Change in cash'];
+
+     document.getElementById("netCashFlow").innerHTML = 
+      'Net Cash Flow: $' + Number(netChange).toLocaleString();
+
+     if (netChange > 0) {
+      document.getElementById('netCashFlow').style.color="green";
+     } else {
+      document.getElementById('netCashFlow').style.color="red";
+     }
+     document.getElementById('netCashFlow').style.paddingLeft="40px";
+     document.getElementById('netCashFlow').style.paddingTop="35px";
+     
+
+     cashFlows.push(operating);
+     cashFlows.push(investing);
+     cashFlows.push(financing);
+
+     var min = Math.min(...cashFlows);
+     var max = Math.max(...cashFlows);
+
+     console.log(min);
+     console.log(max);
+
+     var cashFlowTypes = ["Operating", "Investing", "Financing"];
+
+     console.log(cashFlows);
+
+     // Bar Chart Example
+var ctx = document.getElementById("cashBarChart");
+var cashBarChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: cashFlowTypes,
+    datasets: [{
+      label: "Cash Flows",
+      backgroundColor: "#4e73df",
+      hoverBackgroundColor: "#2e59d9",
+      borderColor: "#4e73df",
+      data: cashFlows,
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        left: 10,
+        right: 25,
+        top: 25,
+        bottom: 0
+      }
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false,
+          drawBorder: false
+        },
+        ticks: {
+          maxTicksLimit: 6
+        },
+        maxBarThickness: 25,
+      }],
+      yAxes: [{
+        ticks: {
+          min: min,
+          max: max,
+          minTicksLimit: 3,
+          maxTicksLimit: 3,
+          padding: 10,
+          // Include a dollar sign in the ticks
+          callback: function(value, index, values) {
+            return '$' + number_format(value);
+          }
+        },
+        gridLines: {
+          color: "rgb(234, 236, 244)",
+          zeroLineColor: "rgb(234, 236, 244)",
+          drawBorder: false,
+          borderDash: [2],
+          zeroLineBorderDash: [2]
+        }
+      }],
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleMarginBottom: 10,
+      titleFontColor: '#6e707e',
+      titleFontSize: 14,
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+        label: function(tooltipItem, chart) {
+          var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+        }
+      }
+    },
+  }
+});
+
+   }
+
+
+
+    // Flags descrive which dashboard elements to show
+    var standardDashboardFlags = {
+      historicalPrice:true,
+      analystsPie:true,
+      volume:true,
+      debtRatio:true,
+      marketCapitalization:true,
+      volatility:true,
+      revenueSources:true,
+      currentRatio:true,
+      revenueOverTime:true,
+      "author":""
+    }
+
+
+    var firestoreDocumentId = "";
+    var db = firebase.firestore();
+
+
+    firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // user is logged in, therefore do not show the UI and rather just allow them to proceed
+
+            // user.uid // get the userId
+
+            var cUser = firebase.auth().currentUser;
+            standardDashboardFlags.author = cUser.uid;
+
+            db.collection("userDashboards").where("author", "==", cUser.uid).get().then(function(doc) {
+              var documentLibraries = doc.docs;
+              if(documentLibraries.length > 0) {
+                console.log("Document data:", documentLibraries[0].data())
+                standardDashboardFlags = documentLibraries[0].data();
+                firestoreDocumentId = documentLibraries[0].id;
+              } else {
+                console.log("Document does not exist")
+                db.collection("userDashboards").add(standardDashboardFlags)
+                .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    firestoreDocumentId = docRef.id;
+                })
+                .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                });
+              }
+
+              manageFlags(standardDashboardFlags);
+
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+
+            console.log('user is logged in, don\'t show UI');
+            // document.getElementById('loader').style.display = 'none';
+            // document.getElementById('createAccount').style.display = 'none';
+
+            // Get user's dashboard setup. Each user should have a set of rules which properly describe their dashboard setup.
+            // We can imagine this to be some sort of json blob with flags.
+            // Examples which we will use are presented above, const flags
+
+          } else {
+            console.log("User is not signed in!")
+
+            // standardDashboardFlags = documentLibraries[0].data();
+            manageFlags(standardDashboardFlags);
+          }
+    })
+
+
+    // FIREBASE FUNCTIONS
+    var functions = firebase.functions();
+
+    // Step 1) Replace getCompanyProfile with function name
+    var getCompanyProfile = firebase.functions().httpsCallable('getCompanyProfile');
+
+    // Call the function, and for any inputs, use a dictionary
+    getCompanyProfile({'ticker': ticker}).then(function(result) {
+      // Read result of the Cloud Function.
+      var sanitizedMessage = result.data;
+      var dataToParse = JSON.parse(String(sanitizedMessage).substring(5 + ticker.length + 10, String(sanitizedMessage).length-7));
+      console.log("Message:", dataToParse)
+
+      document.getElementById("mktCap").textContent = "$" + Number(dataToParse.MktCap).toLocaleString();
+      document.getElementById("companyDescription").textContent = dataToParse.description;
+      document.getElementById("companyCeo").textContent = "CEO: " + dataToParse.CEO;
+      document.getElementById("companySite").textContent = dataToParse.website;
+      document.getElementById("companySite").href = dataToParse.website;
+      document.getElementById("stockPerc").textContent = dataToParse.ChangesPerc;
+      document.getElementById("industry").textContent = "Industry: " + dataToParse.industry;
+      document.getElementById("sector").textContent = "Sector: " + dataToParse.sector;
+
+      if(dataToParse.Changes < 0){
+        document.getElementById("stockPerc").style = 'margin-left: 7%;' + "color:red;"
+      } else {
+        document.getElementById("stockPerc").style = 'margin-left: 7%;' + "color:green;"
+      } 
+    }).catch(function(error) {
+      // Getting the Error details.
+      var code = error.code;
+      var message = error.message;
+      var details = error.details;
+      console.log(code, message, details)
+
+      // ...
+    });
+
+    var getCurrentRatios = firebase.functions().httpsCallable('getCurrentRatios');
+    getCurrentRatios({'ticker':ticker}).then(function(result) {
+      var sanitizedMessage = result.data;
+      console.log("Message:",sanitizedMessage)
+    
+    })
+
+    function manageFlags(dashboardFlags){
+      // historicalPrice:true,
+      // analystsPie:true,
+      // volume:true,
+      // debtRatio:true,
+      // marketCapitalization:true,
+      // volatility:true,
+      // revenueSources:true,
+      // currentRatio:true,
+      // revenueOverTime:true,
+      console.log("FLAGS::::",dashboardFlags)
+      if(!standardDashboardFlags.analystsPie){
+        document.getElementById("analystCard").style.display = "none";
+        document.getElementById("analystCardRemove").style.display = "none";
+      } else {
+        document.getElementById("analystCardAdd").style.display = "none";
+      }
+      if(!standardDashboardFlags.historicalPrice){
+        document.getElementById("historicalEarnings").style.display = "none";
+        document.getElementById("historicalEarningsRemove").style.display = "none";
+      } else {
+        document.getElementById("historicalEarningsAdd").style.display = "none";
+      }
+      if(!standardDashboardFlags.currentRatio){
+        document.getElementById("currentRatio").style.display = "none";
+        document.getElementById("currentRatioRemove").style.display = "none";
+      } else {
+        document.getElementById("currentRatioAdd").style.display = "none";
+      }
+      if(!standardDashboardFlags.marketCapitalization){
+        document.getElementById("marketCap").style.display = "none";
+        document.getElementById("marketCapRemove").style.display = "none";
+      } else {
+        document.getElementById("marketCapAdd").style.display = "none";
+      }
+      if(!standardDashboardFlags.revenueOverTime){
+        document.getElementById("revenueOver").style.display = "none";
+        document.getElementById("revenueOverRemove").style.display = "none";
+      } else {
+        document.getElementById("revenueOverAdd").style.display = "none";
+      }
+      if(!standardDashboardFlags.revenueSources){
+        document.getElementById("revenueSources").style.display = "none";
+        document.getElementById("revenueSourcesRemove").style.display = "none";
+      } else {
+        document.getElementById("revenueSourcesAdd").style.display = "none";
+      }
+    }
+
+  function showAnalyst() {
+    standardDashboardFlags.analystsPie = true;
+    document.getElementById("analystCard").style.display = "block";
+    document.getElementById("analystCardAdd").style.display = "none";
+    document.getElementById("analystCardRemove").style.display = "block";
+  }
+  function removeAnalyst() {
+    standardDashboardFlags.analystsPie = false;
+    document.getElementById("analystCard").style.display = "none";
+    document.getElementById("analystCardAdd").style.display = "block";
+    document.getElementById("analystCardRemove").style.display = "none";
+  }
+
+  function showHistoricalEarnings() {
+    standardDashboardFlags.historicalPrice = true;
+    document.getElementById("historicalEarnings").style.display = "block";
+    document.getElementById("historicalEarningsAdd").style.display = "none";
+    document.getElementById("historicalEarningsRemove").style.display = "block";
+  }
+  function removeHistoricalEarnings() {
+    standardDashboardFlags.historicalPrice = false;
+    document.getElementById("historicalEarnings").style.display = "none";
+    document.getElementById("historicalEarningsAdd").style.display = "block";
+    document.getElementById("historicalEarningsRemove").style.display = "none";
+  }
+
+  function showCurrentRatio() {
+    standardDashboardFlags.currentRatio = true;
+    document.getElementById("currentRatio").style.display = "block";
+    document.getElementById("currentRatioAdd").style.display = "none";
+    document.getElementById("currentRatioRemove").style.display = "block";
+  }
+  function removeCurrentRatio() {
+    standardDashboardFlags.currentRatio = false;
+    document.getElementById("currentRatio").style.display = "none";
+    document.getElementById("currentRatioAdd").style.display = "block";
+    document.getElementById("currentRatioRemove").style.display = "none";
+  }
+
+  function showMarketCap() {
+    standardDashboardFlags.marketCapitalization = true;
+    document.getElementById("marketCap").style.display = "block";
+    document.getElementById("marketCapAdd").style.display = "none";
+    document.getElementById("marketCapRemove").style.display = "block";
+  }
+  function removeMarketCap() {
+    standardDashboardFlags.marketCapitalization = false;
+    document.getElementById("marketCap").style.display = "none";
+    document.getElementById("marketCapAdd").style.display = "block";
+    document.getElementById("marketCapRemove").style.display = "none";
+  }
+
+  function showRevenueOver() {
+    standardDashboardFlags.revenueOverTime = true;
+    document.getElementById("revenueOver").style.display = "block";
+    document.getElementById("revenueOverAdd").style.display = "none";
+    document.getElementById("revenueOverRemove").style.display = "block";
+  }
+  function removeRevenueOver() {
+    standardDashboardFlags.revenueOverTime = false;
+    document.getElementById("revenueOver").style.display = "none";
+    document.getElementById("revenueOverAdd").style.display = "block";
+    document.getElementById("revenueOverRemove").style.display = "none";
+  }
+  
+  function showRevenueSources() {
+    standardDashboardFlags.revenueSources = true;
+    document.getElementById("revenueSources").style.display = "block";
+    document.getElementById("revenueSourcesAdd").style.display = "none";
+    document.getElementById("revenueSourcesRemove").style.display = "block";
+  }
+  function removeRevenueSources() {
+    standardDashboardFlags.revenueSources = false;
+    document.getElementById("revenueSources").style.display = "none";
+    document.getElementById("revenueSourcesAdd").style.display = "block";
+    document.getElementById("revenueSourcesRemove").style.display = "none";
+  }
+
+  function showWeekSummary() {
+	    document.getElementById("weekSummary").style.display = "block";
+	    document.getElementById("monthSummary").style.display = "none";
+	    document.getElementById("sixMonthSummary").style.display = "none";
+	    document.getElementById("yearSummary").style.display = "none";
+      document.getElementById("threeYearSummary").style.display = "none";
+      document.getElementById("fiveYearSummary").style.display = "none";
+	  }
+	
+	  function showMonthSummary() {
+	    document.getElementById("weekSummary").style.display = "none";
+	    document.getElementById("monthSummary").style.display = "block";
+	    document.getElementById("sixMonthSummary").style.display = "none";
+	    document.getElementById("yearSummary").style.display = "none";
+	    document.getElementById("threeYearSummary").style.display = "none";
+	    document.getElementById("fiveYearSummary").style.display = "none";
+	  }
+	
+	  function showSixMonthSummary() {
+	    document.getElementById("weekSummary").style.display = "none";
+	    document.getElementById("monthSummary").style.display = "none";
+	    document.getElementById("sixMonthSummary").style.display = "block";
+	    document.getElementById("yearSummary").style.display = "none";
+	    document.getElementById("threeYearSummary").style.display = "none";
+	    document.getElementById("fiveYearSummary").style.display = "none";
+	  }
+	
+	  function showYearSummary() {
+	    document.getElementById("weekSummary").style.display = "none";
+	    document.getElementById("monthSummary").style.display = "none";
+	    document.getElementById("sixMonthSummary").style.display = "none";
+	    document.getElementById("yearSummary").style.display = "block";
+	    document.getElementById("threeYearSummary").style.display = "none";
+	    document.getElementById("fiveYearSummary").style.display = "none";
+	  }
+	
+	  function showThreeYearSummary() {
+	    document.getElementById("weekSummary").style.display = "none";
+	    document.getElementById("monthSummary").style.display = "none";
+	    document.getElementById("sixMonthSummary").style.display = "none";
+	    document.getElementById("yearSummary").style.display = "none";
+	    document.getElementById("threeYearSummary").style.display = "block";
+	    document.getElementById("fiveYearSummary").style.display = "none";
+	  }
+	
+	  function showFiveYearSummary() {
+	    document.getElementById("weekSummary").style.display = "none";
+	    document.getElementById("monthSummary").style.display = "none";
+	    document.getElementById("sixMonthSummary").style.display = "none";
+	    document.getElementById("yearSummary").style.display = "none";
+	    document.getElementById("threeYearSummary").style.display = "none";
+	    document.getElementById("fiveYearSummary").style.display = "block";
+	  }
+	
+
+  function saveFlags(){
+    console.log("Trying to save flags")
+    db.collection("userDashboards").doc(firestoreDocumentId).set(standardDashboardFlags).then(function() {
+        console.log("Document successfully written!");
+      })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+  }
+
+    // FIREBASE FUNCTIONS
+    var functions = firebase.functions();
+
+    // Step 1) Replace getCompanyProfile with function name
+    var getPastWeekReturns = firebase.functions().httpsCallable('getPastWeekReturns');
+
+    function number_format(number, decimals, dec_point, thousands_sep) {
+    // *     example: number_format(1234.56, 2, ',', ' ');
+    // *     return: '1 234,56'
+    number = (number + '').replace(',', '').replace(' ', '');
+    var n = !isFinite(+number) ? 0 : +number,
+      prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+      sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+      dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+      s = '',
+      toFixedFix = function(n, prec) {
+        var k = Math.pow(10, prec);
+        return '' + Math.round(n * k) / k;
+      };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+      s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+      s[1] = s[1] || '';
+      s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+  }
+    // Call the function, and for any inputs, use a dictionary
+    var stocksW = []
+      getPastWeekReturns({'ticker': "SPY"}).then(function(result) {  
+      for (var i = 0; i < result.data.length; i++) {   
+        stocksW.push(result.data[i][1])
+      }
+    
+      
+    getPastWeekReturns({'ticker': ticker}).then(function(result) {
+      // Read result of the Cloud Function.
+      var sanitizedMessage = result.data;
+    
+      var values = result.data
+      console.log("Message:",sanitizedMessage)
+      var days = []
+      var stocks = []
+      for (var i = 0; i < values.length; i++) {
+        var curr = values[i]
+        var day = curr[0].substring(4,6)
+        var month = curr[0].substring(7,9)
+        var year = curr[0].substring(10,14)
+        if (day.substring(0,1) == 0) {
+          day = day.substring(1, 2)
+        }
+        if (month.substring(0,1) == 0) {
+          month = month.substring(1, 2)
+        }
+        days.push(day + "." + month + "." + year)
+        stocks.push(curr[1])
+      }
+      var ratio = stocks[0] / stocksW[0]
+      for (var i = 0; i < stocksW.length; i++) {
+        stocksW[i] = stocksW[i] * ratio
+      }
+    
+      
+      var ctx = document.getElementById("weekSummaryChart");
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: days,
+          datasets: [{
+            label: getCompanyNameFromSymbol(ticker),
+            fill: true,
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: stocks,
+          }, {
+            label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+            lineTension: 0.3,
+            backgroundColor: "rgba(0, 177, 106, 0.05)",
+            borderColor: "rgba(0, 177, 106, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(0, 177, 106, 1)",
+            pointBorderColor: "rgba(0, 177, 106, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: stocksW,
+          }, 
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          legend: {
+            display: true,
+            labels: {
+              padding: 40, 
+              boxWidth: 5,
+              usePointStyle: true,
+            }
+        },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'date'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 7
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                  return '$' + number_format(value);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: true,
+            labels: {
+              padding: 40,
+              boxWidth: 5,
+              usePointStyle: true,
+            }
+          },
+          tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+              }
+            }
+          }
+        }
+      });
+      return result.data
+    }).catch(function(error) {
+      // Getting the Error details.
+      var code = error.code;
+      var message = error.message;
+      var details = error.details;
+      console.log(code, message, details)
+
+      // ...
+    });
+
+    })
+
+/// START ----------
+
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastMonthReturns = firebase.functions().httpsCallable('getPastMonthReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksM = []
+    getPastMonthReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i++) {   
+      stocksM.push(result.data[i][1])
+    }
+
+    
+  getPastMonthReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksM[0]
+    for (var i = 0; i < stocksM.length; i++) {
+      stocksM[i] = stocksM[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("monthSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksM,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastSixMonthReturns = firebase.functions().httpsCallable('getPastSixMonthReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksSixM = []
+    getPastSixMonthReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i++) {   
+      stocksSixM.push(result.data[i][1])
+    }
+
+    
+    getPastSixMonthReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksSixM[0]
+    for (var i = 0; i < stocksSixM.length; i++) {
+      stocksSixM[i] = stocksSixM[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("sixMonthSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksSixM,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+    
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastYearReturns = firebase.functions().httpsCallable('getPastYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksY = []
+  getPastYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i++) {   
+      stocksY.push(result.data[i][1])
+  }
+
+    
+  getPastYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksY[0]
+    for (var i = 0; i < stocksY.length; i++) {
+      stocksY[i] = stocksY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("yearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastThreeYearReturns = firebase.functions().httpsCallable('getPastThreeYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksThreeY = []
+    getPastThreeYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i += 3) {   
+      stocksThreeY.push(result.data[i][1])
+    }
+
+    
+    getPastThreeYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i+=3) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksThreeY[0]
+    for (var i = 0; i < stocksThreeY.length; i++) {
+      stocksThreeY[i] = stocksThreeY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("threeYearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksThreeY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastFiveYearReturns = firebase.functions().httpsCallable('getPastFiveYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksFiveY = []
+    getPastFiveYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i += 5) {   
+      stocksFiveY.push(result.data[i][1])
+    }
+
+    
+    getPastFiveYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i+=5) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksFiveY[0]
+    for (var i = 0; i < stocksFiveY.length; i++) {
+      stocksFiveY[i] = stocksFiveY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("fiveYearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksFiveY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+
+/// END --------
+
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastMonthReturns = firebase.functions().httpsCallable('getPastMonthReturns');
+
+  console.log("a")
+
+    var data2 = null
+    // Call the function, and for any inputs, use a dictionary
+    getPastMonthReturns({'ticker': ticker}).then(function(result) {
+      // Read result of the Cloud Function.
+      var sanitizedMessage = result.data;
+      data2 = result.data;
+      console.log("Message:",sanitizedMessage)
+
+      var dataToParse = JSON.parse(String(sanitizedMessage).substring(5 + ticker.length + 10, String(sanitizedMessage).length-7));
+      console.log("Message:", dataToParse)
+
+    
+  getPastMonthReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksM[0]
+    for (var i = 0; i < stocksM.length; i++) {
+      stocksM[i] = stocksM[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("monthSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksM,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastSixMonthReturns = firebase.functions().httpsCallable('getPastSixMonthReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksSixM = []
+    getPastSixMonthReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i++) {   
+      stocksSixM.push(result.data[i][1])
+    }
+
+    
+    getPastSixMonthReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksSixM[0]
+    for (var i = 0; i < stocksSixM.length; i++) {
+      stocksSixM[i] = stocksSixM[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("sixMonthSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksSixM,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+    
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastYearReturns = firebase.functions().httpsCallable('getPastYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksY = []
+  getPastYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i++) {   
+      stocksY.push(result.data[i][1])
+  }
+
+    
+  getPastYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i++) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksY[0]
+    for (var i = 0; i < stocksY.length; i++) {
+      stocksY[i] = stocksY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("yearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastThreeYearReturns = firebase.functions().httpsCallable('getPastThreeYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksThreeY = []
+    getPastThreeYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i += 3) {   
+      stocksThreeY.push(result.data[i][1])
+    }
+
+    
+    getPastThreeYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i+=3) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksThreeY[0]
+    for (var i = 0; i < stocksThreeY.length; i++) {
+      stocksThreeY[i] = stocksThreeY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("threeYearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksThreeY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+  // Step 1) Replace getCompanyProfile with function name
+  var getPastFiveYearReturns = firebase.functions().httpsCallable('getPastFiveYearReturns');
+
+  console.log("a")
+
+  // Call the function, and for any inputs, use a dictionary
+  var stocksFiveY = []
+    getPastFiveYearReturns({'ticker': "SPY"}).then(function(result) {  
+    for (var i = 0; i < result.data.length; i += 5) {   
+      stocksFiveY.push(result.data[i][1])
+    }
+
+    
+    getPastFiveYearReturns({'ticker': ticker}).then(function(result) {
+    // Read result of the Cloud Function.
+    console.log("b")
+    var sanitizedMessage = result.data;
+
+    var values = result.data
+    console.log("Message:",sanitizedMessage)
+    var days = []
+    var stocks = []
+    for (var i = 0; i < values.length; i+=5) {
+      var curr = values[i]
+      var day = curr[0].substring(4,6)
+      var month = curr[0].substring(7,9)
+      var year = curr[0].substring(10,14)
+      if (day.substring(0,1) == 0) {
+        day = day.substring(1, 2)
+      }
+      if (month.substring(0,1) == 0) {
+        month = month.substring(1, 2)
+      }
+      days.push(day + "." + month + "." + year)
+      stocks.push(curr[1])
+    }
+    var ratio = stocks[0] / stocksFiveY[0]
+    for (var i = 0; i < stocksFiveY.length; i++) {
+      stocksFiveY[i] = stocksFiveY[i] * ratio
+    }
+
+    
+    var ctx = document.getElementById("fiveYearSummaryChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: getCompanyNameFromSymbol(ticker),
+          fill: true,
+          lineTension: 0.3,
+          backgroundColor: "rgba(78, 115, 223, 0.05)",
+          borderColor: "rgba(78, 115, 223, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointBorderColor: "rgba(78, 115, 223, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocks,
+        }, {
+          label: getCompanyNameFromSymbol("SPY").substring(5, 12),
+          lineTension: 0.3,
+          backgroundColor: "rgba(0, 177, 106, 0.05)",
+          borderColor: "rgba(0, 177, 106, 1)",
+          pointRadius: 3,
+          pointBackgroundColor: "rgba(0, 177, 106, 1)",
+          pointBorderColor: "rgba(0, 177, 106, 1)",
+          pointHoverRadius: 3,
+          pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+          pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+          pointHitRadius: 10,
+          pointBorderWidth: 2,
+          data: stocksFiveY,
+        }, 
+        ],
+      },
+      options: {
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            left: 10,
+            right: 25,
+            top: 25,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40, 
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+      },
+        scales: {
+          xAxes: [{
+            time: {
+              unit: 'date'
+            },
+            gridLines: {
+              display: false,
+              drawBorder: false
+            },
+            ticks: {
+              maxTicksLimit: 7
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxTicksLimit: 5,
+              padding: 10,
+              // Include a dollar sign in the ticks
+              callback: function(value, index, values) {
+                return '$' + number_format(value);
+              }
+            },
+            gridLines: {
+              color: "rgb(234, 236, 244)",
+              zeroLineColor: "rgb(234, 236, 244)",
+              drawBorder: false,
+              borderDash: [2],
+              zeroLineBorderDash: [2]
+            }
+          }],
+        },
+        legend: {
+          display: true,
+          labels: {
+            padding: 40,
+            boxWidth: 5,
+            usePointStyle: true,
+          }
+        },
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          titleMarginBottom: 10,
+          titleFontColor: '#6e707e',
+          titleFontSize: 14,
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          intersect: false,
+          mode: 'index',
+          caretPadding: 10,
+          callbacks: {
+            label: function(tooltipItem, chart) {
+              var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+              return datasetLabel + ': $' + tooltipItem.yLabel.toFixed(2);
+            }
+          }
+        }
+      }
+    });
+    return result.data
+  }).catch(function(error) {
+    // Getting the Error details.
+    var code = error.code;
+    var message = error.message;
+    var details = error.details;
+    console.log(code, message, details)
+
+    // ...
+  });
+
+  })
+
+
+    var getCurrentRatios = firebase.functions().httpsCallable('getCurrentRatios');
+    getCurrentRatios({'ticker': ticker}).then(function(result) {
+      var sanitizedMessage = result.data;
+      console.log("Message:",sanitizedMessage)
+
+      // Area Chart Example
+      var ctx = document.getElementById("currentRatioChart");
+      var myLineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: sanitizedMessage[0],
+          datasets: [{
+            label: "Current Ratio",
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: sanitizedMessage[1],
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'date'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 7
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                  return value.toFixed(2);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': ' +  tooltipItem.yLabel.toFixed(2);
+              }
+            }
+          }
+        }
+      });
+      
+    }).catch(function(error) {
+      var code = error.code;
+      var message = error.message;
+      var details = error.details;
+      console.log(code, message, details)
+    });
+
+    // Revenue Over Time widget
+    var getQuarterlyRevenue = functions.httpsCallable('getQuarterlyRevenue');
+    getQuarterlyRevenue({'ticker': ticker}).then(function(result) {
+      var sanitizedMessage = result.data;
+
+      var ctx = document.getElementById("revenueOverTime");
+      var revenueOverTimeChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: sanitizedMessage[0].reverse(),
+          datasets: [{
+            label: "Quarterly Revenue",
+            lineTension: 0.3,
+            backgroundColor: "rgba(78, 115, 223, 0.05)",
+            borderColor: "rgba(78, 115, 223, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointBorderColor: "rgba(78, 115, 223, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+            pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: sanitizedMessage[1].reverse(),
+          }],
+        },
+        options: {
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              left: 10,
+              right: 25,
+              top: 25,
+              bottom: 0
+            }
+          },
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'date'
+              },
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              ticks: {
+                maxTicksLimit: 7
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                minTicksLimit: 4,
+                maxTicksLimit: 5,
+                padding: 10,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                  return '$' + number_format(value);
+                }
+              },
+              gridLines: {
+                color: "rgb(234, 236, 244)",
+                zeroLineColor: "rgb(234, 236, 244)",
+                drawBorder: false,
+                borderDash: [2],
+                zeroLineBorderDash: [2]
+              }
+            }],
+          },
+          legend: {
+            display: false
+          },
+          tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            titleMarginBottom: 10,
+            titleFontColor: '#6e707e',
+            titleFontSize: 14,
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            intersect: false,
+            mode: 'index',
+            caretPadding: 10,
+            callbacks: {
+              label: function(tooltipItem, chart) {
+                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+              }
+            }
+          }
+        }
+      })
+    }).catch(function(error) {
+      var code = error.code;
+      var message = error.message;
+      var details = error.details;
+      console.log(code, message, details)
+    });
+
+
+
+  </script>
+
+</body>
+
+</html>
